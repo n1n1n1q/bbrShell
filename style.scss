@@ -1,0 +1,157 @@
+@use "sass:color";
+
+$bg: #212223;
+$fg: #f1f1f1;
+$accent: #378DF7;
+$radius: 7px;
+
+window.Bar {
+    border: none;
+    border-radius: 50px;
+    box-shadow: none;
+    background-color: $bg;
+    color: $fg;
+    font-size: 1.01em;
+    font-weight:500;
+
+    .NixIcon {
+        padding: 0px;
+        margin: 0px;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 40px;
+    }
+
+    .Workspaces  {
+        border-radius: 15px;
+        background-color: #2a2d2f;
+        margin: 0px;
+        padding: 0px;
+
+        .active {
+            background-color: red;
+        }
+
+        button {
+            all: unset;
+            &:hover label {
+                background-color: color.adjust($fg, $alpha: -0.84);
+                border-color: color.adjust($accent, $alpha: -0.8);
+            }
+
+            &:active label {
+                background-color: color.adjust($fg, $alpha: -0.8)
+            }
+        }
+
+        label {
+            transition: 200ms;
+            padding: 0 8px;
+            margin: 2px;
+            border-radius: $radius;
+            border: 1pt solid transparent;
+        }
+
+        .focused label {
+            color: $accent;
+            border-color: $accent;
+        }
+    }
+
+    .SysTray {
+        margin-right: 8px;
+
+        button {
+            padding: 0 4px;
+        }
+    }
+
+    .FocusedClient {
+        color: $accent;
+    }
+
+    .Media .Cover {
+        min-height: 1.2em;
+        min-width: 1.2em;
+        border-radius: $radius;
+        background-position: center;
+        background-size: contain;
+    }
+
+    .Battery label {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .Wifi {
+        padding-right: 20px;
+    }
+
+
+    .Date {
+        font-size: 0.68em;
+    }
+
+    .Time {
+        font-size: 0.7em;
+    }
+
+
+    .TimeDate {
+        padding: 0px;
+        margin: 0px;
+        padding-right: 20px;
+    }
+
+    .Media {
+        .MediaContainer {
+            margin: 0px;
+            padding: 0px;
+            margin-left: 4px;
+        }
+        .Title {
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        .Artist {
+            font-size: 0.7em;
+        }
+        .Cover {
+            padding: 6px;
+            margin-right: 7px;
+        }
+    }
+
+    .AudioSlider {
+        * {
+            all: unset;
+        }
+
+        icon {
+            margin-right: .6em;
+        }
+
+        & {
+            margin: 0 1em;
+        }
+
+        trough {
+            background-color: color.adjust($fg, $alpha: -0.8);
+            border-radius: $radius;
+        }
+
+        highlight {
+            background-color: $accent;
+            min-height: .8em;
+            border-radius: $radius;
+        }
+
+        slider {
+            background-color: $fg;
+            border-radius: $radius;
+            min-height: 1em;
+            min-width: 1em;
+            margin: -.2em;
+        }
+    }
+}
