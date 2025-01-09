@@ -154,4 +154,13 @@ window.Bar {
             margin: -.2em;
         }
     }
+
+    .VolumeBox {
+        padding-right: 15px;
+        circularprogress {
+            font-size: 5px;
+            min-width: 40px;
+            min-height: 40px;
+        }
+    }
 }
