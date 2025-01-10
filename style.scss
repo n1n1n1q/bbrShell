@@ -142,7 +142,7 @@ window.Bar {
 
         highlight {
             background-color: $accent;
-            min-height: .8em;
+            min-height: .8px;
             border-radius: $radius;
         }
 
@@ -161,6 +161,49 @@ window.Bar {
             font-size: 5px;
             min-width: 40px;
             min-height: 40px;
+        }
+    }
+    .BatteryBox {
+        padding-right: 15px;
+        circularprogress {
+            font-size: 5px;
+            min-width: 40px;
+            min-height: 40px;
+        }
+    }
+    .workspace-container {
+        padding: 0 0.5rem;
+    
+        .workspace-button {
+          background-color: transparent;
+          min-height: 0.5rem;
+          min-width: 0.5rem;
+        //   border: solid 0.15rem #2230a9;
+          border-radius: 10;
+          transition: min-width 0.25s ease-out;
+    
+          &:hover {
+            background-color: #2230a9;
+            &.occupied {
+              background-color: #2230a9;
+            }
+          }
+    
+          &.active {
+            min-width: 2.5rem;
+            min-height: 0.8rem;
+            border-color: #378DF7;
+            background-color: #378DF7;
+          }
+    
+          &.occupied {
+            border: solid 0.15rem transparent;
+            background-color: #2230a9;
+            &.active {
+                border-color: #378DF7;
+                background-color: #378DF7;
+            }
+          }
         }
     }
 }
