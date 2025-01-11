@@ -17,7 +17,7 @@ export default function BatteryLevel() {
                 />
             </circularprogress>
             <label className="battery-label" label={bind(bat, "percentage").as(p =>
-            `${Math.floor(p * 100)} %`
+            `${Math.floor(p * 100)}%`
         )} />
         </box>
     </box>

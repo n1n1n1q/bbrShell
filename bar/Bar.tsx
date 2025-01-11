@@ -1,5 +1,6 @@
 import { bind } from "astal"
 import { Astal, Gtk, Gdk } from "astal/gtk3"
+import AppsIcon from "./modules/AppsIcon"
 import Hyprland from "gi://AstalHyprland"
 import NixIcon from "./modules/NixIcon"
 import Media from "./modules/Media"
@@ -8,7 +9,6 @@ import TimeDate from "./modules/TimeDate"
 import Workspaces from "./modules/Workspaces"
 import Volume from "./modules/Volume"
 import BatteryLevel from "./modules/Battery"
-// import Corner from "./modules/Corner"
 
 function FocusedClient() {
     const hypr = Hyprland.get_default()
@@ -42,6 +42,7 @@ function Right() {
             <Wifi />
             <BatteryLevel />
             <Volume />
+            <AppsIcon />
         </box>
 }
 export default function Bar(monitor: Gdk.Monitor) {
@@ -62,7 +63,6 @@ export default function Bar(monitor: Gdk.Monitor) {
                 <Middle />
                 <Right />
             </centerbox>
-        </window>,
-        ...Corner(monitor)
+        </window>
     ];
 }

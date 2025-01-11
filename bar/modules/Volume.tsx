@@ -11,7 +11,7 @@ export default function Volume() {
         </circularprogress>
         <label className={"volume-label"} 
         label={bind(speaker, "volume").as(p =>
-            `${Math.floor(p * 100)} %`
+            `${Math.floor(p * 100)}%`
         )} />
     </box>
 }
