@@ -8,6 +8,7 @@ import TimeDate from "./modules/TimeDate"
 import Workspaces from "./modules/Workspaces"
 import Volume from "./modules/Volume"
 import BatteryLevel from "./modules/Battery"
+// import Corner from "./modules/Corner"
 
 function FocusedClient() {
     const hypr = Hyprland.get_default()
@@ -46,7 +47,7 @@ function Right() {
 export default function Bar(monitor: Gdk.Monitor) {
     const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;
 
-    return (
+    return [
         <window
             className="Bar"
             gdkmonitor={monitor}
@@ -61,6 +62,7 @@ export default function Bar(monitor: Gdk.Monitor) {
                 <Middle />
                 <Right />
             </centerbox>
-        </window>
-    );
+        </window>,
+        ...Corner(monitor)
+    ];
 }

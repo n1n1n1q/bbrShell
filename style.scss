@@ -120,19 +120,25 @@ window.Bar {
     }
 
     .VolumeBox {
-        padding-right: 15px;
+        padding-right: 10px;
         circularprogress {
             font-size: 5px;
             min-width: 40px;
             min-height: 40px;
         }
+        .volume-label {
+            margin-left: 8px;
+        }
     }
     .BatteryBox {
-        padding-right: 15px;
+        padding-right: 10px;
         circularprogress {
             font-size: 5px;
             min-width: 40px;
             min-height: 40px;
+        }
+        .battery-label {
+            margin-left: 8px;
         }
     }
     .workspace-container {
@@ -194,4 +200,27 @@ window.Bar {
             background-color: rgba(67, 76, 94, 0.5);
         }
     }
+
+}
+
+.corner-left,
+.corner-right {
+    background-color: transparent;
+    min-width: 12px;
+    min-height: 12px;
+}
+
+.corner-left {
+    margin-left: 7px;
+    margin-top: -1px;
+}
+
+.corner-right {
+    margin-right: 7px;
+    margin-top: -1px;
+}
+
+drawingarea {
+    min-width: 12px;
+    min-height: 12px;
 }
