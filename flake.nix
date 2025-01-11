@@ -1,4 +1,3 @@
-# TBD
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -12,14 +11,16 @@
     packages.${system}.default = ags.lib.bundle { 
       inherit pkgs;
       src = ./.;
-      name = "my-shell"; # name of executable
+      name = "bbrShell";
       entry = "app.ts";
       gtk4 = false;
 
-      # additional libraries and executables to add to gjs' runtime
       extraPackages = [
-        # ags.packages.${system}.battery
-        # pkgs.fzf
+        ags.packages.${system}.battery
+        ags.packages.${system}.hyprland
+        ags.packages.${system}.mpris
+        ags.packages.${system}.network
+        ags.packages.${system}.wireplumber
       ];
     };
   };
