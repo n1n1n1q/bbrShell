@@ -5,7 +5,7 @@ import NixIcon from "./modules/NixIcon"
 import Media from "./modules/Media"
 import Wifi from "./modules/Wifi"
 import TimeDate from "./modules/TimeDate"
-import WorkspacesPanelButton from "./modules/Workspaces"
+import Workspaces from "./modules/Workspaces"
 import Volume from "./modules/Volume"
 import BatteryLevel from "./modules/Battery"
 
@@ -31,7 +31,7 @@ function Left() {
 
 function Middle() {
     return <box halign={Gtk.Align.CENTER} margin-top={10} margin-bottom={10}>
-        <WorkspacesPanelButton/>
+        <Workspaces/>
     </box>
 }
 

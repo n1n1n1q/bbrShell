@@ -11,6 +11,7 @@ window.Bar {
     box-shadow: none;
     background-color: $bg;
     color: $fg;
+    font-family: Ubuntu Nerd Font;
     font-size: 1.01em;
     font-weight:500;
 
@@ -21,43 +22,6 @@ window.Bar {
         padding-right: 15px;
         font-size: 40px;
     }
-
-    .Workspaces  {
-        border-radius: 15px;
-        background-color: #2a2d2f;
-        margin: 0px;
-        padding: 0px;
-
-        .active {
-            background-color: red;
-        }
-
-        button {
-            all: unset;
-            &:hover label {
-                background-color: color.adjust($fg, $alpha: -0.84);
-                border-color: color.adjust($accent, $alpha: -0.8);
-            }
-
-            &:active label {
-                background-color: color.adjust($fg, $alpha: -0.8)
-            }
-        }
-
-        label {
-            transition: 200ms;
-            padding: 0 8px;
-            margin: 2px;
-            border-radius: $radius;
-            border: 1pt solid transparent;
-        }
-
-        .focused label {
-            color: $accent;
-            border-color: $accent;
-        }
-    }
-
     .SysTray {
         margin-right: 8px;
 
@@ -93,7 +57,7 @@ window.Bar {
     }
 
     .Time {
-        font-size: 0.7em;
+        font-size: 0.9em;
     }
 
 
@@ -172,37 +136,62 @@ window.Bar {
         }
     }
     .workspace-container {
-        padding: 0 0.5rem;
-    
-        .workspace-button {
-          background-color: transparent;
-          min-height: 0.5rem;
-          min-width: 0.5rem;
-          border-radius: 10;
-          transition: min-width 0.25s ease-out;
-    
-          &:hover {
-            background-color: #2230a9;
-            &.occupied {
-              background-color: #2230a9;
+        padding: 5px 11px 5px 11px;
+        border-radius: 50px;
+        background-color: #2A2B2C;
+    }
+      
+    .workspace-button {
+        text-decoration: none;
+        border: none;
+        // border: 3px solid $bg;
+        // border-radius: 20px;
+
+        margin-left: 4px;
+        margin-right: 4px;
+
+        color: #ababab;
+        font-size: 20px;
+        font-weight: 500;
+
+        transition: all 0.3s ease;
+        background-image: none;
+        // background-color: #3C3D3E;
+        padding: 4px 8px;
+        box-shadow: none;
+
+        &.occupied {
+            color:#a0a0a0;
+            background-color: #454647;
+            // border-top: 3px solid $bg;
+            // border-bottom: 3px solid $bg;
+            border-radius: 0;
+            // border: 2px solid #61bf6a;
+            margin: 0;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        &.active {
+            background-color: $fg;
+            color: $bg;
+        }
+
+        &.occupied-left {
+            // border-left: 2px solid $bg;
+            border-radius: 50px 0 0 50px;
+        }
+
+        &.occupied-right {
+            // border-right: 2px solid $bg;
+            border-radius: 0px 50px 50px 0px;
+            &.occupied-left {
+                border-radius: 50px;
             }
-          }
-    
-          &.active {
-            min-width: 2.5rem;
-            min-height: 0.8rem;
-            border-color: #378DF7;
-            background-color: #378DF7;
-          }
-    
-          &.occupied {
-            border: solid 0.15rem transparent;
-            background-color: #2230a9;
-            &.active {
-                border-color: #378DF7;
-                background-color: #378DF7;
-            }
-          }
+        }
+
+        &:hover {
+            background-color: rgba(67, 76, 94, 0.5);
         }
     }
 }
