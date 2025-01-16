@@ -32,7 +32,7 @@ function AppButton({ app }: { app: Apps.Application }) {
     </button>
 }
 
-export default function Applauncher() {
+export default function Applauncher(monitor: Gdk.Monitor) {
     const { CENTER } = Gtk.Align
     const apps = new Apps.Apps()
 
@@ -45,6 +45,7 @@ export default function Applauncher() {
 
     return <window
         name="launcher"
+        gdkmonitor={monitor}
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM}
         exclusivity={Astal.Exclusivity.IGNORE}
         keymode={Astal.Keymode.ON_DEMAND}
