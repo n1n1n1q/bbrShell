@@ -15,18 +15,10 @@ function AppButton({ app }: { app: Apps.Application }) {
         <box>
             <icon icon={app.iconName} />
             <box valign={Gtk.Align.CENTER} vertical>
-                <label
-                    className="name"
-                    truncate
-                    xalign={0}
-                    label={app.name}
-                />
-                {app.description && <label
-                    className="description"
-                    wrap
-                    xalign={0}
-                    label={app.description}
-                />}
+                <label className="name" truncate xalign={0} label={app.name} />
+                {app.description && 
+                    <label className="description" wrap xalign={0} label={app.description} />
+                }
             </box>
         </box>
     </button>
@@ -43,33 +35,38 @@ export default function Applauncher(monitor: Gdk.Monitor) {
         hide()
     }
 
+    // Create window as a POPUP
+    const window = new Gtk.Window({ type: Gtk.WindowType.POPUP })
+
     return <window
+        // __instance={window}
         name="launcher"
         gdkmonitor={monitor}
-        anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
-        exclusivity={Astal.Exclusivity.IGNORE}
+        anchor={Astal.WindowAnchor.RIGHT | Astal.WindowAnchor.TOP}
+        // let clicks pass through to the icon behind the popup
+        exclusivity={Astal.Exclusivity.PASS_THROUGH}
         keymode={Astal.Keymode.ON_DEMAND}
         layer={Astal.Layer.TOP}
-        // margin-top={100}
-        // margin-right={7}
         application={App}
         onShow={() => text.set("")}
+        // hide when losing focus, so you can click the icon again
+        onFocusOutEvent={() => hide()}
         onKeyPressEvent={(self, event: Gdk.Event) => {
             if (event.get_keyval()[1] === Gdk.KEY_Escape)
                 self.hide()
         }}>
-        <box>
+        <box className="launcher-container">
             <box hexpand={false} vertical>
                 <box widthRequest={500} className="Applauncher" vertical>
                     <entry
-                        placeholderText="Search"
+                        placeholderText="Search Applications..."
                         text={text()}
                         onChanged={self => text.set(self.text)}
                         onActivate={onEnter}
                     />
                     <box spacing={6} vertical>
                         {list.as(list => list.map(app => (
-                            <AppButton app={app} />
+                            <AppButton key={app.name} app={app} />
                         )))}
                     </box>
                     <box
@@ -78,7 +75,7 @@ export default function Applauncher(monitor: Gdk.Monitor) {
                         vertical
                         visible={list.as(l => l.length === 0)}>
                         <icon icon="system-search-symbolic" />
-                        <label label="No match found" />
+                        <label label="No applications found" />
                     </box>
                 </box>
             </box>

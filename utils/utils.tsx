@@ -1,7 +1,28 @@
 import { App, Gdk, Gtk } from "astal/gtk3";
+import Hyprland from "gi://AstalHyprland";
+import AppLauncher from "../widgets/AppLauncher";
+
+const hyprland = Hyprland.get_default();
 
 export function toggleWindow(windowName: string) {
     const win = App.get_window(windowName);
     if (!win) return;
-    win.is_visible() ? win.hide() : win.present();
+
+    if (win.is_visible()) {
+        win.destroy();
+        return;
+    }
+    
+    const activeHyprMonitor = hyprland.focused_monitor;
+    if (!activeHyprMonitor) return;
+
+    const gdkDisplay = Gdk.Display.get_default();
+    const gdkMonitor = gdkDisplay?.get_monitor(activeHyprMonitor.id);
+    if (!gdkMonitor) return;
+
+    switch (windowName) {
+        case 'launcher':
+            AppLauncher(gdkMonitor);
+            break;
+    }
 }

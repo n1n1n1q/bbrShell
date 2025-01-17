@@ -1,4 +1,5 @@
 import { toggleWindow } from "../../utils/utils";
+// import { App } from "astal/gtk3";
 
 export default function AppsIcon() {
     return (
