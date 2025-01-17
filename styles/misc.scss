@@ -1,0 +1,41 @@
+.Wifi {
+    padding-right: 20px;
+}
+
+.Date {
+    font-size: 0.68em;
+}
+
+.Time {
+    font-size: 0.9em;
+}
+
+.TimeDate {
+    padding: 0px;
+    margin: 0px;
+    padding-right: 20px;
+}
+
+.VolumeBox {
+    circularprogress {
+        font-size: 5px;
+        min-width: 40px;
+        min-height: 40px;
+    }
+    .volume-label {
+        margin-left: 8px;
+    }
+}
+
+.BatteryBox {
+    padding-right: 10px;
+    circularprogress {
+        font-size: 5px;
+        min-width: 40px;
+        min-height: 40px;
+    }
+    .battery-label {
+        margin-left: 8px;
+    }
+}
+

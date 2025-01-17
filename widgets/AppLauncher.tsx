@@ -46,19 +46,20 @@ export default function Applauncher(monitor: Gdk.Monitor) {
     return <window
         name="launcher"
         gdkmonitor={monitor}
-        anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM}
+        anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
         exclusivity={Astal.Exclusivity.IGNORE}
         keymode={Astal.Keymode.ON_DEMAND}
+        layer={Astal.Layer.TOP}
+        // margin-top={100}
+        // margin-right={7}
         application={App}
         onShow={() => text.set("")}
-        onKeyPressEvent={function (self, event: Gdk.Event) {
+        onKeyPressEvent={(self, event: Gdk.Event) => {
             if (event.get_keyval()[1] === Gdk.KEY_Escape)
                 self.hide()
         }}>
         <box>
-            <eventbox widthRequest={4000} expand onClick={hide} />
             <box hexpand={false} vertical>
-                <eventbox heightRequest={100} onClick={hide} />
                 <box widthRequest={500} className="Applauncher" vertical>
                     <entry
                         placeholderText="Search"
@@ -80,9 +81,7 @@ export default function Applauncher(monitor: Gdk.Monitor) {
                         <label label="No match found" />
                     </box>
                 </box>
-                <eventbox expand onClick={hide} />
             </box>
-            <eventbox widthRequest={4000} expand onClick={hide} />
         </box>
     </window>
 }

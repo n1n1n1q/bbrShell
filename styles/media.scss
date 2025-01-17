@@ -1,0 +1,28 @@
+@use "vars" as *;
+
+.Media .Cover {
+    min-height: 1.2em;
+    min-width: 1.2em;
+    border-radius: $radius;
+    background-position: center;
+    background-size: contain;
+}
+
+.Media {
+    .MediaContainer {
+        margin: 0px;
+        padding: 0px;
+        margin-left: 4px;
+    }
+    .Title {
+        font-weight: 600;
+        font-size: 0.9em;
+    }
+    .Artist {
+        font-size: 0.7em;
+    }
+    .Cover {
+        padding: 6px;
+        margin-right: 7px;
+    }
+}

@@ -1,0 +1,54 @@
+@use "vars" as *;
+
+.workspace-container {
+    padding: 5px 11px 5px 11px;
+    border-radius: 50px;
+    background-color: #2A2B2C;
+}
+    
+.workspace-button {
+    text-decoration: none;
+    border: none;
+
+    margin-left: 4px;
+    margin-right: 4px;
+
+    color: #ababab;
+    font-size: 20px;
+    font-weight: 500;
+
+    transition: all 0.3s ease;
+    background-image: none;
+    // background-color: #3C3D3E;
+    padding: 4px 8px;
+    box-shadow: none;
+
+    &.occupied {
+        color:#a0a0a0;
+        background-color: #454647;
+        border-radius: 0;
+        margin: 0;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    &.active {
+        background-color: $fg;
+        color: $bg;
+    }
+
+    &.occupied-left {
+        border-radius: 50px 0 0 50px;
+    }
+
+    &.occupied-right {
+        border-radius: 0px 50px 50px 0px;
+        &.occupied-left {
+            border-radius: 50px;
+        }
+    }
+
+    &:hover {
+        background-color: rgba(67, 76, 94, 0.5);
+    }
+}

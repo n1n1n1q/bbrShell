@@ -1,0 +1,56 @@
+@use "vars" as *;
+
+window#launcher {
+    all: unset;
+
+    box.Applauncher {
+        background-color: $bg;
+        border-radius: 11px;
+        margin-top: 120px;
+        margin-right: 7px;
+        padding: .8rem;
+        box-shadow: none;
+        text-decoration: none;
+
+        entry {
+            margin-bottom: .8rem;
+        }
+
+        button {
+            min-width: 0;
+            min-height: 0;
+            padding: .5rem;
+            box-shadow: none;
+
+            icon {
+                font-size: 3em;
+                margin-right: .3rem;
+            }
+
+            label.name {
+                font-weight: bold;
+                font-size: 1.1em
+            }
+
+            label.description {
+                color: gtkalpha($fg, .7);
+            }
+        }
+
+        box.not-found {
+            padding: 1rem;
+
+            icon {
+                font-size: 6em;
+                color: $fg;
+                color: gtkalpha($fg, .7);
+            }
+
+            label {
+                color: $fg;
+                color: gtkalpha($fg, .9);
+                font-size: 1.2em;
+            }
+        }
+    }
+}

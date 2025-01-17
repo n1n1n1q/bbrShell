@@ -1,14 +1,14 @@
 import { bind } from "astal"
 import { Astal, Gtk, Gdk } from "astal/gtk3"
-import AppsIcon from "./modules/AppsIcon"
+import AppsIcon from "./bar_modules/AppsIcon"
 import Hyprland from "gi://AstalHyprland"
-import NixIcon from "./modules/NixIcon"
-import Media from "./modules/Media"
-import Wifi from "./modules/Wifi"
-import TimeDate from "./modules/TimeDate"
-import Workspaces from "./modules/Workspaces"
-import Volume from "./modules/Volume"
-import BatteryLevel from "./modules/Battery"
+import NixIcon from "./bar_modules/NixIcon"
+import Media from "./bar_modules/Media"
+import Wifi from "./bar_modules/Wifi"
+import TimeDate from "./bar_modules/TimeDate"
+import Workspaces from "./bar_modules/Workspaces"
+import Volume from "./bar_modules/Volume"
+import BatteryLevel from "./bar_modules/Battery"
 
 function FocusedClient() {
     const hypr = Hyprland.get_default()

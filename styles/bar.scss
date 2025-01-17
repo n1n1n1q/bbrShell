@@ -1,0 +1,12 @@
+@use "vars" as *;
+
+window.Bar {
+    border: none;
+    border-radius: 50px;
+    box-shadow: none;
+    background-color: $bg;
+    color: $fg;
+    font-family: Ubuntu Nerd Font;
+    font-size: 1.01em;
+    font-weight:500;
+}
