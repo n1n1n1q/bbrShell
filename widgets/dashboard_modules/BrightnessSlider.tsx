@@ -1,9 +1,11 @@
 import { Variable, bind } from "astal"
 import { Gtk } from "astal/gtk3"
 import {
-  getKbdBrightness,
-  setKbdBrightness
+  setScreenBrightness,
+  getScreenBrightness
 } from "../../utils/brightness"
+
+const screenValue = new Variable(getScreenBrightness())
 
 export default function BrightnessSlider() {
   return (
@@ -12,9 +14,9 @@ export default function BrightnessSlider() {
       <slider
         min={0.1}
         hexpand
-        value={bind(Variable(getKbdBrightness()))}
+        value={bind(Variable(getScreenBrightness()))}
         onChangeValue={(self) => {
-          setKbdBrightness(self.value)
+          setScreenBrightness(self.value)
         }}
       />
     </box>

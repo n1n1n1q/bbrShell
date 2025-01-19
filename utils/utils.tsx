@@ -1,6 +1,7 @@
 import { App, Gdk, Gtk } from "astal/gtk3";
 import Hyprland from "gi://AstalHyprland";
 import AppLauncher from "../widgets/AppLauncher";
+import Dashboard from "../widgets/Dashboard";
 
 const hyprland = Hyprland.get_default();
 
@@ -23,6 +24,9 @@ export function toggleWindow(windowName: string) {
     switch (windowName) {
         case 'launcher':
             AppLauncher(gdkMonitor);
+            break;
+        case 'dashboard':
+            Dashboard(gdkMonitor);
             break;
     }
 }

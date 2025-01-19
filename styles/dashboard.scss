@@ -4,19 +4,7 @@ window#dashboard {
     all: unset;
 
     box.Dashboard {
-        border-radius: 40px;
-        min-width: 450px;
-        min-height: 650px;
-        .dashboard-container{
-        border-radius: 40px;
-        min-width: 450px;
-        min-height: 650px;
-        }
-
-        .sliders-container {
-            min-width: 400px;
-        }
-
+        
         background-color: $bg;
         border-radius: 11px;
         margin-top: 10px;
@@ -24,6 +12,14 @@ window#dashboard {
         padding: .8rem;
         box-shadow: none;
         text-decoration: none;
+        min-width: 450px;
+        min-height: 650px;
+
+        .sliders-container {
+            min-width: 400px;
+        }
+
+
 
         .volume-slider {
             min-width: 300px;
@@ -66,55 +62,33 @@ window#dashboard {
                 }
             }
         }
-        
-        .muted {
-            .volume-slider {
-                highlight {
+        .quick-access {
+            margin-bottom: 15px;
+        }
+        .butt {
+            background-color: $bg;
+            color: $fg;
+            border: 1px solid $fg;
+            border-radius: 50px;
+            &:hover {
+                background-color: $fg;
+                color: $bg;
+            }
+        }
+        .buttons-container {
+            margin-bottom: 15px;
+            .buttons-row-1 {
+                margin-bottom: 8px;
+            }
+            .butt2 {
+                background-color: $bg;
+                color: $fg;
+                border: 1px solid $fg;
+                border-radius: 50px;
+                &:hover {
+                    background-color: $fg;
+                    color: $bg;
                 }
-            }
-            .slider-icon {
-            }
-        }
-        
-
-        entry {
-            margin-bottom: .8rem;
-        }
-
-        button {
-            min-width: 0;
-            min-height: 0;
-            padding: .5rem;
-            box-shadow: none;
-
-            icon {
-                font-size: 3em;
-                margin-right: .3rem;
-            }
-
-            label.name {
-                font-weight: bold;
-                font-size: 1.1em
-            }
-
-            label.description {
-                color: gtkalpha($fg, .7);
-            }
-        }
-
-        box.not-found {
-            padding: 1rem;
-
-            icon {
-                font-size: 6em;
-                color: $fg;
-                color: gtkalpha($fg, .7);
-            }
-
-            label {
-                color: $fg;
-                color: gtkalpha($fg, .9);
-                font-size: 1.2em;
             }
         }
     }
