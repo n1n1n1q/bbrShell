@@ -7,8 +7,8 @@ import {
 
 export default function BrightnessSlider() {
   return (
-    <box className="brightness-slider" valign={Gtk.Align.CENTER}>
-      {/* <image iconName="display-brightness-symbolic" valign={Gtk.Align.CENTER} /> */}
+    <box className="dashboard-slider" valign={Gtk.Align.CENTER}>
+      <icon icon = "keyboard-brightness-symbolic" />
       <slider
         min={0.1}
         hexpand

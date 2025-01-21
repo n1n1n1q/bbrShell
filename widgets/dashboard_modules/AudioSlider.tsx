@@ -2,37 +2,16 @@ import AstalWp from "gi://AstalWp?version=0.1";
 import { Gtk } from "astal/gtk3";
 import { bind } from "astal";
 
-export default () => {
-	const speaker = AstalWp.get_default()?.audio.defaultSpeaker!;
 
-	return (
-		<box
-			className={bind(speaker, "mute").as((mute) =>
-				mute ? "muted" : "",
-			)}
-		>
-			<overlay
-				className={"volume-slider"}
-				child={
-					<slider
-						draw_value={false}
-						hexpand={true}
-						onDragged={({ value }) => {
-							speaker.volume = value;
-							speaker.mute = false;
-						}}
-						value={bind(speaker, "volume")}
-					/>
-				}
-				overlay={
-					<icon
-						className={"slider-icon"}
-						icon={bind(speaker, "volumeIcon")}
-						hexpand={false}
-						halign={Gtk.Align.START}
-					/>
-				}
-			/>
-		</box>
-	);
-};
+export default function AudioSlider() {
+    const speaker = AstalWp.get_default()?.audio.defaultSpeaker!
+
+    return <box className="dashboard-slider" css="min-width: 140px">
+        <icon icon={bind(speaker, "volumeIcon")} />
+        <slider
+            hexpand
+            onDragged={({ value }) => speaker.volume = value}
+            value={bind(speaker, "volume")}
+        />
+    </box>
+}

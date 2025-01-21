@@ -4,6 +4,15 @@ import { Variable } from "astal"
 import AudioSlider from "./dashboard_modules/AudioSlider"
 import Brightness from "./dashboard_modules/BrightnessSlider"
 import Keyboard from "./dashboard_modules/Keyboard"
+import WifiQA from "./dashboard_modules/WifiQuick"
+import BluetoothQA from "./dashboard_modules/BluetoothQuick"
+import Screenshot from "./dashboard_modules/Screenshot"
+import ColorPicker from "./dashboard_modules/Colorpick"
+import Lock from "./dashboard_modules/Lock"
+import WifiButton from "./dashboard_modules/Wifi"
+import BluetoothButton from "./dashboard_modules/Bluetooth"
+import AudioButton from "./dashboard_modules/Audio"
+import SettingsButton from "./dashboard_modules/Settings"
 
 const MAX_ITEMS = 8
 
@@ -38,7 +47,6 @@ export default function Dashboard(monitor: Gdk.Monitor) {
     const window = new Gtk.Window({ type: Gtk.WindowType.POPUP })
 
     return <window
-        __instance={window}
         name="dashboard"
         gdkmonitor={monitor}
         anchor={Astal.WindowAnchor.LEFT | Astal.WindowAnchor.TOP}
@@ -53,23 +61,21 @@ export default function Dashboard(monitor: Gdk.Monitor) {
                 self.hide()
         }}>
         <box className="Dashboard" orientation={1} >
-            <box className="quick-access" homogeneous={true} spacing={5}>
-                <button className="butt" css="min-width: 10px"></button>
-                <button className="butt" css="min-width: 10px"></button>
-                <button className="butt" css="min-width: 10px"></button>
-                <button className="butt" css="min-width: 10px"></button>
-                <button className="butt" css="min-width: 10px"></button>
+            <box className="quick-access">
+                <WifiQA />
+                <BluetoothQA />
+                <Screenshot />
+                <ColorPicker />
+                <Lock />
             </box>
             <box className="buttons-container" orientation={1}> 
-                <box className="buttons-row-1" homogeneous={true} spacing={5}>
-                    <button className="butt2" css="min-width: 30px"></button>
-                    <button className="butt2" css="min-width: 30px"></button>
-                    <button className="butt2" css="min-width: 30px"></button>
+                <box className="buttons-row-1">
+                    <WifiButton />
+                    <BluetoothButton />
+                    <AudioButton />
                 </box>
-                <box className="buttons-row-2" homogeneous={true} spacing={5}>
-                    <button className="butt2" css="min-width: 30px"></button>
-                    <button className="butt2" css="min-width: 30px"></button>
-                    <button className="butt2" css="min-width: 30px"></button>
+                <box className="buttons-row-2">
+                    <SettingsButton />
                 </box>
             </box>
             <box className="sliders-container" orientation={1}>
