@@ -23,24 +23,31 @@ in {
     home = {
       packages = [ 
         cfg.package
+        pkgs.gjs
+        pkgs.gtk4
+        pkgs.libadwaita
         (pkgs.writeShellScriptBin "bbrShell" ''
           ${cfg.package}/bin/bbrShell "$@"
         '')
       ];
-
-      # Autostart configuration
-      activation = mkIf cfg.autoStart {
-        startBbrShell = lib.hm.dag.entryAfter ["writeBoundary"] ''
-          ${cfg.package}/bin/bbrShell &
-        '';
-      };
     };
 
-    # Optionally, you can add Hyprland/window manager startup configuration
-    # wayland.windowManager.hyprland = mkIf cfg.autoStart {
-    #   settings = {
-    #     exec-once = [ "${cfg.package}/bin/bbrShell" ];
-    #   };
-    # };
+    systemd.user.services.bbrShell = mkIf cfg.autoStart {
+      Unit = {
+        Description = "bbrShell AGS Shell";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
+      };
+
+      Service = {
+        ExecStart = "${cfg.package}/bin/bbrShell";
+        Restart = "on-failure";
+        RestartSec = 5;
+      };
+
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+    };
   };
 }
