@@ -36,21 +36,6 @@
         fi
       '';
     };
-
-    homeManagerModules.bbrShell = {lib, config, ...}:
-    {
-      description = "Home Manager module for bbrShell";
-      options.bbrShell.enable = {
-        type = lib.types.bool;
-        default = false;
-        description = "Enable bbrShell support.";
-      };
-
-      config = lib.mkIf config.bbrShell.enable {
-        environment.systemPackages = [
-          pkgs.bbrShell
-        ];
-      };
-    };
+    homeManagerModules.bbrShell = import ./nixos/module.nix self;
   };
 }

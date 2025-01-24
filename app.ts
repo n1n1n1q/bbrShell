@@ -6,7 +6,7 @@ import Dashboard from "./widgets/Dashboard"
 
 App.start({
     css: style,
-    icons: `./icon`,
+    // icons: "icon",
     main() {
         App.get_monitors().forEach(monitor => {
             Bar(monitor);

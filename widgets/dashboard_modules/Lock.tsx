@@ -7,7 +7,7 @@ export default function Lock() {
             tooltipText="Lock Screen"
             className="quick"
         >
-            <icon icon="lock-symbolic"/>
+            <label label=""/>
         </button>
     );
 }

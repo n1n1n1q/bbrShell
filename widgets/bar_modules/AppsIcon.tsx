@@ -4,10 +4,7 @@ import { toggleWindow } from "../../utils/utils";
 export default function AppsIcon() {
     return (
         <eventbox onClick={() => toggleWindow("launcher")}>
-            <icon
-                icon="apps-symbolic" 
-                className="AppsIcon"
-            />
+            <label label = "󰀻" className = "AppsIcon" />
         </eventbox>
     );
 }
