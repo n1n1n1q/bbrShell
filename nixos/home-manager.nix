@@ -37,10 +37,10 @@ in {
     };
 
     # Optionally, you can add Hyprland/window manager startup configuration
-    wayland.windowManager.hyprland = mkIf cfg.autoStart {
-      settings = {
-        exec-once = [ "${cfg.package}/bin/bbrShell" ];
-      };
-    };
+    # wayland.windowManager.hyprland = mkIf cfg.autoStart {
+    #   settings = {
+    #     exec-once = [ "${cfg.package}/bin/bbrShell" ];
+    #   };
+    # };
   };
 }
