@@ -29,5 +29,6 @@
     nixosModules = {
       programs = import ./nixos/modules.nix;
     };
+    homeManagerModules = import ./nixos/modules.nix;
   };
 }
