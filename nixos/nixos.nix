@@ -1,31 +1,26 @@
-{ config, lib, pkgs, ... }:
+{ lib, config, ... }:
 
-{
+let
+  bbrShellExecutable = config.inputs.ags.lib.findExecutable config;
+in {
   options.programs.bbrShell = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = false;
-      description = "Enable the bbrShell service to start automatically on boot.";
+      description = "Enable bbrShell as a systemd service.";
     };
   };
 
   config = lib.mkIf config.programs.bbrShell.enable {
-    # Ensure the executable is available
-    environment.systemPackages = [ pkgs.bbrShell ];
-
-    # Define the systemd service
     systemd.services.bbrShell = {
       description = "bbrShell Service";
-      wantedBy = [ "default.target" ];
-      after = [ "network.target" ];
+      after = [ "network.target" "graphical.target" ];
+      wants = [ "network.target" "graphical.target" ];
       serviceConfig = {
-        ExecStart = "${pkgs.bbrShell}/bin/bbrShell";
+        ExecStart = "${bbrShellExecutable}/bin/bbrShell";
         Restart = "always";
-        RestartSec = "5s";
       };
-      install = {
-        wantedBy = [ "multi-user.target" ];
-      };
+      wantedBy = [ "multi-user.target" ];
     };
   };
 }
