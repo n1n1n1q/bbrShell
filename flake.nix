@@ -8,7 +8,9 @@
   outputs = { self, nixpkgs, ags, home-manager }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
-  in rec {
+  in {
+    homeManagerModules.default = import ./nixos/home-manager.nix;
+    
     packages.${system}.default = ags.lib.bundle {
       inherit pkgs;
       src = ./.;
@@ -16,16 +18,21 @@
       entry = "app.ts";
       gtk4 = false;
 
-      extraPackages = [
-        ags.packages.${system}.battery
-        ags.packages.${system}.hyprland
-        ags.packages.${system}.mpris
-        ags.packages.${system}.network
-        ags.packages.${system}.wireplumber
-        ags.packages.${system}.bluetooth
-        ags.packages.${system}.apps
+      extraPackages = with ags.packages.${system}; [
+        battery
+        hyprland
+        mpris
+        network
+        wireplumber
+        bluetooth
+        apps
       ];
     };
-    homeManagerModules.bbrShell = import ./nixos/home-manager.nix;
+
+    overlays.default = final: prev: {
+      bbrShell = self.packages.${system}.default;
+    };
+
+    nixosModules.default = import ./nixos/nixos.nix;
   };
 }
