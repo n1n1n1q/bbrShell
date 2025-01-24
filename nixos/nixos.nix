@@ -1,7 +1,7 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 let
-  bbrShellExecutable = "${pkgs.bbrShell}/bin/bbrShell";
+  bbrShellExecutable = "${inputs.bbrShell.packages.${pkgs.system}.default}/bin/bbrShell";
 in {
   options.programs.bbrShell = {
     enable = lib.mkOption {

@@ -4,33 +4,39 @@ with lib;
 
 let
   cfg = config.programs.bbrShell;
-in
-{
+  package = inputs.self.packages.${system}.default;
+in {
   options.programs.bbrShell = {
-    enable = mkOption {
-      type = types.bool;
-      default = false;
-      description = "Enable the bbrShell program in Home Manager.";
-    };
+    enable = mkEnableOption "Enable bbrShell AGS configuration";
 
-    startupArgs = mkOption {
-      type = types.str;
-      default = "";
-      description = "Arguments to pass to bbrShell on startup.";
+    autoStart = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Automatically start bbrShell on login";
     };
   };
 
   config = mkIf cfg.enable {
-    home.packages = [
-      pkgs.nodejs
-    ];
+    home = {
+      packages = [ 
+        (cfg.package or null)
+        (pkgs.writeShellScriptBin "bbrShell" ''
+          ${package}/bin/bbrShell "$@"
+        '')
+      ];
 
-    systemd.user.services.bbrShell = {
-      description = "bbrShell program";
-      wantedBy = [ "default.target" ];
-      serviceConfig = {
-        ExecStart = "${config.home.sessionPath}/bin/bash -c 'cd ${pkgs.bbrShell}/bin && ./bbrShell ${cfg.startupArgs}'";
-        Restart = "always";
+      # Autostart configuration
+      activation = mkIf cfg.autoStart {
+        startBbrShell = lib.hm.dag.entryAfter ["writeBoundary"] ''
+          ${package}/bin/bbrShell &
+        '';
+      };
+    };
+
+    # Optionally, you can add Hyprland/window manager startup configuration
+    wayland.windowManager.hyprland = mkIf cfg.autoStart {
+      settings = {
+        exec-once = [ "${package}/bin/bbrShell" ];
       };
     };
   };
