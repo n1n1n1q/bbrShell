@@ -1,7 +1,7 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 
 let
-  bbrShellExecutable = config.inputs.ags.lib.findExecutable config;
+  bbrShellExecutable = "${pkgs.bbrShell}/bin/bbrShell";
 in {
   options.programs.bbrShell = {
     enable = lib.mkOption {
@@ -17,7 +17,7 @@ in {
       after = [ "network.target" "graphical.target" ];
       wants = [ "network.target" "graphical.target" ];
       serviceConfig = {
-        ExecStart = "${bbrShellExecutable}/bin/bbrShell";
+        ExecStart = bbrShellExecutable;
         Restart = "always";
       };
       wantedBy = [ "multi-user.target" ];
