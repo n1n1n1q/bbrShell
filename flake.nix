@@ -7,8 +7,8 @@
   outputs = { self, nixpkgs, ags }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
-  in {
-    packages.${system}.default = ags.lib.bundle { 
+  in rec {
+    packages.${system}.default = ags.lib.bundle {
       inherit pkgs;
       src = ./.;
       name = "bbrShell";
@@ -21,7 +21,13 @@
         ags.packages.${system}.mpris
         ags.packages.${system}.network
         ags.packages.${system}.wireplumber
+        ags.packages.${system}.bluetooth
+        ags.packages.${system}.apps
       ];
+    };
+
+    nixosModules = {
+      programs = import ./nixos/modules.nix;
     };
   };
 }
