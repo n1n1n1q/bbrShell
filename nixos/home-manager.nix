@@ -1,10 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 with lib;
 
 let
   cfg = config.programs.bbrShell;
-  package = inputs.self.packages.${system}.default;
+  package = inputs.self.packages.${pkgs.system}.default;
 in {
   options.programs.bbrShell = {
     enable = mkEnableOption "Enable bbrShell AGS configuration";
