@@ -2,15 +2,12 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     ags.url = "github:aylur/ags";
-    home-manager.url = "github:nix-community/home-manager";
   };
 
-  outputs = { self, nixpkgs, ags, home-manager }: let
+  outputs = { self, nixpkgs, ags }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
-  in {
-    homeManagerModules.default = import ./nixos/home-manager.nix;
-    
+  in rec {
     packages.${system}.default = ags.lib.bundle {
       inherit pkgs;
       src = ./.;
@@ -18,21 +15,42 @@
       entry = "app.ts";
       gtk4 = false;
 
-      extraPackages = with ags.packages.${system}; [
-        battery
-        hyprland
-        mpris
-        network
-        wireplumber
-        bluetooth
-        apps
-      ];
+      extraPackages =
+        [
+          ags.packages.${system}.battery
+          ags.packages.${system}.hyprland
+          ags.packages.${system}.mpris
+          ags.packages.${system}.network
+          ags.packages.${system}.wireplumber
+          ags.packages.${system}.bluetooth
+          ags.packages.${system}.apps
+        ];
     };
 
-    overlays.default = final: prev: {
-      bbrShell = self.packages.${system}.default;
+    overlay = final: prev: {
+      bbrShell = prev.writeShellScriptBin "bbrShell" ''
+        if [ "$#" -eq 0 ]; then
+            exec ${self.packages.${final.stdenv.system}.default}/bin/bbrShell
+        else
+            exec ${ags.packages.${final.stdenv.system}.io}/bin/astal -i bbrShell "$*"
+        fi
+      '';
     };
 
-    nixosModules.default = import ./nixos/nixos.nix;
+    homeManagerModules.bbrShell = {lib, config, ...}:
+    {
+      description = "Home Manager module for bbrShell";
+      options.bbrShell.enable = {
+        type = lib.types.bool;
+        default = false;
+        description = "Enable bbrShell support.";
+      };
+
+      config = lib.mkIf config.bbrShell.enable {
+        environment.systemPackages = [
+          pkgs.bbrShell
+        ];
+      };
+    };
   };
 }
