@@ -1,5 +1,5 @@
 import AstalWp from "gi://AstalWp?version=0.1";
-import { bind } from "astal"
+import { bash } from "../../utils/utils";
 
 export default function AudioToggle() {
     const speaker = AstalWp.get_default()?.audio.defaultSpeaker!
@@ -8,6 +8,7 @@ export default function AudioToggle() {
         <button 
             tooltipText="Audio"
             className="dashboard-button"
+            onClick={() => bash("pavucontrol")}
         >
             <icon icon="audio-volume-high-symbolic"/>
         </button>

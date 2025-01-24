@@ -49,7 +49,6 @@ export default function Applauncher(monitor: Gdk.Monitor) {
         layer={Astal.Layer.TOP}
         application={App}
         onShow={() => text.set("")}
-        // hide when losing focus, so you can click the icon again
         onFocusOutEvent={() => hide()}
         onKeyPressEvent={(self, event: Gdk.Event) => {
             if (event.get_keyval()[1] === Gdk.KEY_Escape)

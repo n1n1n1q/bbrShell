@@ -1,32 +1,33 @@
-import { App, Gdk, Gtk } from "astal/gtk3";
+import { execAsync, exec } from "astal";
+import { App } from "astal/gtk3";
 import Hyprland from "gi://AstalHyprland";
-import AppLauncher from "../widgets/AppLauncher";
-import Dashboard from "../widgets/Dashboard";
 
 const hyprland = Hyprland.get_default();
 
 export function toggleWindow(windowName: string) {
+    console.log('toggleWindow', windowName);
     const win = App.get_window(windowName);
     if (!win) return;
 
     if (win.is_visible()) {
-        win.destroy();
+        win.hide();
         return;
     }
-    
-    const activeHyprMonitor = hyprland.focused_monitor;
-    if (!activeHyprMonitor) return;
 
-    const gdkDisplay = Gdk.Display.get_default();
-    const gdkMonitor = gdkDisplay?.get_monitor(activeHyprMonitor.id);
-    if (!gdkMonitor) return;
+    win.set_property("monitor", hyprland.focused_monitor.id);
+    win.show();
+}
 
-    switch (windowName) {
-        case 'launcher':
-            AppLauncher(gdkMonitor);
-            break;
-        case 'dashboard':
-            Dashboard(gdkMonitor);
-            break;
+export function restart() {
+    print("restarting")
+    try {
+        exec("bash -c 'bbrShell -q'");
+    } catch (e) {
+        console.error(e);
     }
+    execAsync("bash -c 'bbrshell -q'");
+}
+
+export function bash(command: string) {
+    execAsync(`bash -c '${command}'`);
 }

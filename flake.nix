@@ -24,7 +24,13 @@
           ags.packages.${system}.wireplumber
           ags.packages.${system}.bluetooth
           ags.packages.${system}.apps
-        ];
+        ]++ (with pkgs; [
+          libnotify
+          gnome-control-center
+          networkmanagerapplet
+          blueman
+          pavucontrol
+        ]);
     };
 
     overlay = final: prev: {
