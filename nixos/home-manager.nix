@@ -1,13 +1,16 @@
-{ config, inputs, lib, pkgs, ... }:
-
+{ config, lib, pkgs, inputs, ... }:
 with lib;
-
 let
   cfg = config.programs.bbrShell;
-  package = inputs.self.packages.${pkgs.system}.default;
 in {
   options.programs.bbrShell = {
     enable = mkEnableOption "Enable bbrShell AGS configuration";
+    
+    package = mkOption {
+      type = types.package;
+      default = inputs.bbrShell.packages.${pkgs.system}.default;
+      description = "bbrShell package to use";
+    };
 
     autoStart = mkOption {
       type = types.bool;
@@ -19,16 +22,16 @@ in {
   config = mkIf cfg.enable {
     home = {
       packages = [ 
-        (cfg.package or null)
+        cfg.package
         (pkgs.writeShellScriptBin "bbrShell" ''
-          ${package}/bin/bbrShell "$@"
+          ${cfg.package}/bin/bbrShell "$@"
         '')
       ];
 
       # Autostart configuration
       activation = mkIf cfg.autoStart {
         startBbrShell = lib.hm.dag.entryAfter ["writeBoundary"] ''
-          ${package}/bin/bbrShell &
+          ${cfg.package}/bin/bbrShell &
         '';
       };
     };
@@ -36,7 +39,7 @@ in {
     # Optionally, you can add Hyprland/window manager startup configuration
     wayland.windowManager.hyprland = mkIf cfg.autoStart {
       settings = {
-        exec-once = [ "${package}/bin/bbrShell" ];
+        exec-once = [ "${cfg.package}/bin/bbrShell" ];
       };
     };
   };
