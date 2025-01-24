@@ -29,9 +29,9 @@
 
     # NixOS module
     nixosModules = {
-      programs = import ./nixos/modules.nix;
+      programs = import ./nixos/nixos.nix;
     };
-    homeManagerModules.bbrShell = import ./nixos/modules.nix;
+    homeManagerModules.bbrShell = import ./nixos/home-manager.nix;
     homeConfigurations.default = home-manager.lib.homeManagerConfiguration {
       inherit system pkgs;
       modules = [ self.homeManagerModules.bbrShell ];
