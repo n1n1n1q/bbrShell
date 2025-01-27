@@ -21,11 +21,10 @@ export function toggleWindow(windowName: string) {
 export function restart() {
     print("restarting")
     try {
-        exec("bash -c 'bbrShell -q'");
+        bash("kill $(ps aux | grep 'bbrShell' | grep -v 'grep' | awk '{print $2}') && bbrShell && disown")
     } catch (e) {
         console.error(e);
     }
-    execAsync("bash -c 'bbrshell -q'");
 }
 
 export function bash(command: string) {
