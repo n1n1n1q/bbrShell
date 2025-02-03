@@ -8,15 +8,15 @@
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in rec {
-    packages.${system}.default = ags.lib.bundle {
-      inherit pkgs;
-      src = ./.;
-      name = "bbrShell";
-      entry = "app.ts";
-      gtk4 = false;
+   packages.${system} = {
+      default = ags.lib.bundle {
+        inherit pkgs;
+        src = ./.;
+        name = "bbrShell";
+        entry = "app.ts";
+        gtk4 = false;
 
-      extraPackages =
-        [
+        extraPackages = [
           ags.packages.${system}.battery
           ags.packages.${system}.hyprland
           ags.packages.${system}.mpris
@@ -24,14 +24,15 @@
           ags.packages.${system}.wireplumber
           ags.packages.${system}.bluetooth
           ags.packages.${system}.apps
-        ]++ (with pkgs; [
+        ] ++ (with pkgs; [
           libnotify
           gnome-control-center
           networkmanagerapplet
           blueman
           pavucontrol
         ]);
-        bbrMenu = pkgs.writeShellScriptBin "bbrMenu" ''
+      };
+      bbrMenu = pkgs.writeShellScriptBin "bbrMenu" ''
         ags toggle "launcher"
       '';
     };
