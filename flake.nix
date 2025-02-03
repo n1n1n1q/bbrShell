@@ -41,6 +41,9 @@
             exec ${ags.packages.${final.stdenv.system}.io}/bin/astal -i bbrShell "$*"
         fi
       '';
+      bbrMenu = pkgs.writeShellScriptBin "bbrMenu" ''
+        ags toggle "launcher"
+      '';
     };
     homeManagerModules.bbrShell = import ./nixos/module.nix self;
   };
