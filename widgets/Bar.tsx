@@ -9,6 +9,7 @@ import TimeDate from "./bar_modules/TimeDate"
 import Workspaces from "./bar_modules/Workspaces"
 import Volume from "./bar_modules/Volume"
 import BatteryLevel from "./bar_modules/Battery"
+import { toggleWindow } from "../utils/utils"
 
 function FocusedClient() {
     const hypr = Hyprland.get_default()

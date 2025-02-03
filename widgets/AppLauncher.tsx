@@ -1,6 +1,7 @@
 import Apps from "gi://AstalApps"
 import { App, Astal, Gdk, Gtk } from "astal/gtk3"
 import { Variable } from "astal"
+import { toggleWindow } from "../utils/utils"
 
 const MAX_ITEMS = 8
 
@@ -35,7 +36,6 @@ export default function Applauncher(monitor: Gdk.Monitor) {
         hide()
     }
 
-    // Create window as a POPUP
     const window = new Gtk.Window({ type: Gtk.WindowType.POPUP })
 
     return <window
@@ -43,7 +43,6 @@ export default function Applauncher(monitor: Gdk.Monitor) {
         name="launcher"
         gdkmonitor={monitor}
         anchor={Astal.WindowAnchor.RIGHT | Astal.WindowAnchor.TOP}
-        // let clicks pass through to the icon behind the popup
         exclusivity={Astal.Exclusivity.PASS_THROUGH}
         keymode={Astal.Keymode.ON_DEMAND}
         layer={Astal.Layer.TOP}
@@ -52,11 +51,11 @@ export default function Applauncher(monitor: Gdk.Monitor) {
         onFocusOutEvent={() => hide()}
         onKeyPressEvent={(self, event: Gdk.Event) => {
             if (event.get_keyval()[1] === Gdk.KEY_Escape)
-                self.hide()
+                toggleWindow("launcher")
         }}>
         <box className="launcher-container">
             <box hexpand={false} vertical>
-                <box widthRequest={500} className="Applauncher" vertical>
+                <box className="Applauncher" vertical>
                     <entry
                         placeholderText="Search Applications..."
                         text={text()}
