@@ -31,6 +31,9 @@
           blueman
           pavucontrol
         ]);
+        bbrMenu = pkgs.writeShellScriptBin "bbrMenu" ''
+        ags toggle "launcher"
+      '';
     };
 
     overlay = final: prev: {
@@ -41,9 +44,7 @@
             exec ${ags.packages.${final.stdenv.system}.io}/bin/astal -i bbrShell "$*"
         fi
       '';
-      bbrMenu = pkgs.writeShellScriptBin "bbrMenu" ''
-        ags toggle "launcher"
-      '';
+      bbrMenu = self.packages.${system}.bbrMenu;
     };
     homeManagerModules.bbrShell = import ./nixos/module.nix self;
   };
