@@ -4,9 +4,17 @@ import Bar from "./widgets/Bar"
 import AppLauncher from "./widgets/AppLauncher"
 import Dashboard from "./widgets/Dashboard"
 import { restart } from "./utils/utils"
+import { toggleWindow } from "./utils/utils"
 
 App.start({
     css: style,
+    requestHandler(request: string, res: (response: any) => void) {
+        if (request == "launcher") {
+            toggleWindow("launcher");
+            res("launcher toggled");
+        }
+        res("unknown command")
+    },
     main() {
         const monitor = App.get_monitors()[0];
         Dashboard(monitor).hide();

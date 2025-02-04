@@ -24,17 +24,8 @@
           ags.packages.${system}.wireplumber
           ags.packages.${system}.bluetooth
           ags.packages.${system}.apps
-        ] ++ (with pkgs; [
-          libnotify
-          gnome-control-center
-          networkmanagerapplet
-          blueman
-          pavucontrol
-        ]);
+        ];
       };
-      bbrMenu = pkgs.writeShellScriptBin "bbrMenu" ''
-        ags toggle "launcher"
-      '';
     };
 
     overlay = final: prev: {
@@ -45,7 +36,6 @@
             exec ${ags.packages.${final.stdenv.system}.io}/bin/astal -i bbrShell "$*"
         fi
       '';
-      bbrMenu = self.packages.${system}.bbrMenu;
     };
     homeManagerModules.bbrShell = import ./nixos/module.nix self;
   };
