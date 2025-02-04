@@ -24,6 +24,7 @@
           ags.packages.${system}.wireplumber
           ags.packages.${system}.bluetooth
           ags.packages.${system}.apps
+          ags.packages.${system}.notifd
         ];
       };
     };
