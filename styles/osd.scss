@@ -1,0 +1,30 @@
+@use "vars" as *;
+
+window.OSD {
+    // min-height: 10rem;
+    box.OSD {
+        border-radius: 100px;
+        background-color: $bg;
+        padding: 13px 16px;
+        margin: 13px;
+        box-shadow: 3px 3px 7px 0 rgba(0,0,0,.4);
+    }
+
+    icon {
+        font-size: 1.2rem;
+    }
+
+    label {
+        font-size: 1rem;
+    }
+
+    levelbar {
+        trough {
+            margin: 1 .6rem;
+        }
+
+        block {
+            min-height: 0.4rem;
+        }
+    }
+}
